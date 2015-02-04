@@ -1,0 +1,34 @@
+@media print and (color) {
+  * {
+    /* Prevent browsers from discarding the majority of color info */
+    -webkit-print-color-adjust: exact;
+    -moz-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a:link, a:visited {
+    text-decoration: none;
+    color: black;
+  }
+
+  .no_print {
+    display: none;
+  }
+
+  .print_only {
+    display: inherit;
+  }
+
+  /* You have to add the class ie to (preferably) <html> for this to work */
+  .ie .print_only {
+    display: block;
+  }
+
+  .print_right {
+    float: right;
+  }
+
+  .print_left {
+    float: left;
+  }
+}
