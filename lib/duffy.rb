@@ -35,8 +35,12 @@ module Duffy
     # Smart Titlecase
     # Use :update_custom to add uppercase special cases
     # Use :update_default to replace my defaults
-    config_accessor(:upcase_custom)
+    config_accessor(:upcase_custom)     # {%w(NBC CNN FOO)}
     config_accessor(:upcase_default)    {%w(HR II III IV Q&A USA)}
+
+    # Pretty Committer
+    config_accessor(:committers)        # {"jpd" => "Jacob", "ers|Eric" => "Eric"}
+
   end
 
 

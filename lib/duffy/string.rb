@@ -57,14 +57,10 @@ class String
   end
 
   # Parse a git username into a friendly name
+  # Expects committers to be a hash in this format:  { jpd" => "Jacob", /ers|Eric/ => "Eric" }
+  # All String keys are converted to Regex, explicit Regex is fine too.
   def pretty_committer
-    case self
-      when /jpd/      then "Jacob"
-      when /ers|Eric/ then "Eric"
-      when /gac/      then "Glenn"
-      when /jes/      then "Samsky"
-      else self
-    end
+    Hash(Duffy.configuration.committers).map{|k,v| v if Regexp.new(k) =~ self}.compact.first or self
   end
 
   def space2nbsp
