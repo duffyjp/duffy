@@ -125,9 +125,11 @@ class String
     end #each
 
     # Special Cases:
+    upcase_re = (Array(Duffy.configuration.upcase_custom) + Array(Duffy.configuration.upcase_default)).uniq.join("|")
+
     result.gsub!(/ V(s?)\. /, ' v\1. ') # "v." and "vs."
     result.gsub!(/([''])S\b/, '\1s') # 'S (otherwise you get "the SEC'S decision")
-    result.gsub!(/\b(AOB|AT&T|Q&A|II|III|IV|HR|CT|CHS|CME|DFM|HRS|PA|UDDS|USA|UWMF|WREN)\b/i) { |w| w.upcase } # "AT&T" and "Q&A", which get tripped up by
+    result.gsub!(/\b(#{upcase_re})\b/i) { |w| w.upcase } unless upcase_re.blank?
     result
   end
 end
