@@ -24,7 +24,7 @@ String Patches:
     to_alpha
     to_alpha_numeric
     pretty_phone
-    pretty_committer    # TODO: Setup gem configuration to load patterns
+    pretty_committer    # "bob".pretty_committer => "Robert McLovin"
     space2nbsp
     nl2br
     gender_human
@@ -32,7 +32,7 @@ String Patches:
 ```
 
 Git Access:
-This one is namespaced incase you use the 'git' gem.  I found it to be overkill for what I wanted.
+This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
 ```ruby
     Duffy::Git.log      # => Produce tab separated listing of current git log.
     Duffy::Git.count    # => Count of git commits in current branch
@@ -44,6 +44,12 @@ This is a work in progress.  I'm going to try to put all my generic helpers here
     menu_tag
     excel_icon
     icon
+```
+
+CSS Reset & Print Styles: Very barebones CSS Reset / Sensible defaults and Print stylesheets.
+```ruby
+    require duffy/reset
+    require duffy/print
 ```
 
 ## Contributing

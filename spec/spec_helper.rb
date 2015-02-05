@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'rails'
 Bundler.setup
 require 'duffy'
 
