@@ -2,8 +2,7 @@
 class String
 
   def to_ssn
-    ssn = self.to_s.gsub(/[^0-9]/, "")            # now it's a string with only 0-9
-    ssn = "%09d" % ssn.to_i                       # now it has leading zeros
+    ssn = "%09d" % self.to_numeric.to_i           # strips string of non zeros, and pads leading zeros
     ssn[0..2] + "-" + ssn[3..4] + "-" + ssn[5..8] # now it's like 123-45-6789
   end
 
@@ -25,7 +24,7 @@ class String
   # serial: 0001 to 9999
   def sanitize_ssn
     begin
-      ssn = "%09d" % self.to_numeric
+      ssn = "%09d" % self.to_numeric.to_i
       raise "Too Long" if ssn.length > 9
       area, group, serial = ssn[0..2], ssn[3..4], ssn[5..8]
       raise "Area Range Invalid" unless ("001" .. "665").cover?(area) or ("667" .. "899").cover?(area)

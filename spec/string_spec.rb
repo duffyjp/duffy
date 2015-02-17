@@ -42,6 +42,10 @@ describe String do
       # Invalid Area
     end
 
+    it "078051120   => 078051120 " do
+      "078051120".sanitize_ssn.should == "078051120"
+    end
+
     it "666123456   => nil" do
       "666123456".sanitize_ssn.should == nil
       # Invalid Area
