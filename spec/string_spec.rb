@@ -7,6 +7,10 @@ describe String do
       "123-45-6789".to_ssn.should == "123-45-6789"
     end
 
+    it "formats a ssn with leading zero properly" do
+      "078051120".to_ssn.should == "078-05-1120"
+    end
+
     it "formats an unformatted SSN" do
       "123456789".to_ssn.should == "123-45-6789"
     end
