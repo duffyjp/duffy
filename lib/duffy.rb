@@ -1,10 +1,16 @@
-require File.dirname(__FILE__) + "/duffy/engine"
+# External Requirements
+require 'active_support'
+require 'date'
+
+# Rails Only Requirements
+require File.dirname(__FILE__) + "/duffy/engine"  if defined?(Rails)
 require File.dirname(__FILE__) + "/duffy/railtie" if defined?(Rails)
 
-
+# Normal Requirements
 require File.dirname(__FILE__) + "/duffy/version"
 require File.dirname(__FILE__) + "/duffy/git"
 require File.dirname(__FILE__) + "/duffy/string"
+require File.dirname(__FILE__) + "/duffy/date"
 
 
 # Required to add assets to pipeline
@@ -40,8 +46,10 @@ module Duffy
     # Pretty Committer
     config_accessor(:committers)        # {"jpd" => "Jacob", "ers|Eric" => "Eric"}
 
+    # Fiscal Year Start: Default July 1st.
+    config_accessor(:fiscal_month)      {7}
+    config_accessor(:fiscal_day)        {1}
   end
-
 
 end
 

@@ -31,6 +31,11 @@ String Patches:
     smart_titlecase     # Note: Has config options. See lib/duffy.rb
 ```
 
+Date Patches:
+```ruby
+    fiscal_year         # Returns fiscal_year for a date.  See config to set your organization's fiscal year start.
+```
+
 Git Access:
 This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
 ```ruby
