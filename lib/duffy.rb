@@ -7,10 +7,11 @@ require File.dirname(__FILE__) + "/duffy/engine"  if defined?(Rails)
 require File.dirname(__FILE__) + "/duffy/railtie" if defined?(Rails)
 
 # Normal Requirements
-require File.dirname(__FILE__) + "/duffy/version"
+require File.dirname(__FILE__) + "/duffy/date"
 require File.dirname(__FILE__) + "/duffy/git"
 require File.dirname(__FILE__) + "/duffy/string"
-require File.dirname(__FILE__) + "/duffy/date"
+require File.dirname(__FILE__) + "/duffy/system"
+require File.dirname(__FILE__) + "/duffy/version"
 
 
 # Required to add assets to pipeline
