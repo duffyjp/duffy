@@ -41,7 +41,18 @@ This one is namespaced in case you use the 'git' gem.  I found it to be overkill
 ```ruby
     Duffy::Git.log      # => Produce tab separated listing of current git log.
     Duffy::Git.count    # => Count of git commits in current branch
+    Duffy::Git.email    # => Local repo's git user.email or global if none.
 ```
+
+CPU Detection:
+Linux only for now, each method returns 1 on non-Linux hosts.
+Example results for my dual core i5 with hyperthreading.
+```ruby
+   Duffy::System.cpus     # => 1
+   Duffy::System.cores    # => 2
+   Duffy::System.threads  # => 4
+```
+
 
 View Helpers:
 This is a work in progress.  I'm going to try to put all my generic helpers here.

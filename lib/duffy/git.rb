@@ -9,14 +9,22 @@ module Duffy
       # Produce tab separated listing of current git log.
       # Useful for displaying a development history page.
       def log
-        `git log --pretty=format:"%ad%x09%an%x09%s" --date=short`
+        `git log --pretty=format:"%ad%x09%an%x09%s" --date=short`.strip.presence
       end
 
       # I tend use the commit count / 1000.0 as a version for my applications.
       # You wouldn't want to do that if you're building a gem used by others.
       def count
-        `git rev-list HEAD --count`
+        `git rev-list HEAD --count`.presence.to_i
       end
+
+      # Read the git commiter's email.
+      # Uses local if present, otherwise global (git default procedure)
+      # nil if unset
+      def email
+        `git config --get user.email`.strip.presence
+      end
+
 
     end
   end

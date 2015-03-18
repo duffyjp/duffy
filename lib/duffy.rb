@@ -1,5 +1,6 @@
 # External Requirements
 require 'active_support'
+require 'active_support/core_ext/object/blank'
 require 'date'
 
 # Rails Only Requirements
