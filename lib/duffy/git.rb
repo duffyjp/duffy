@@ -1,3 +1,5 @@
+require 'active_support/core_ext/object/blank'
+
 module Duffy
 
   # I like to have a git log in the admin section of my websites.  I use these in my capistrano tasks to
@@ -18,7 +20,7 @@ module Duffy
         `git rev-list HEAD --count`.presence.to_i
       end
 
-      # Read the git commiter's email.
+      # Read the git committer's email.
       # Uses local if present, otherwise global (git default procedure)
       # nil if unset
       def email
