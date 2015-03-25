@@ -42,6 +42,7 @@ This one is namespaced in case you use the 'git' gem.  I found it to be overkill
     Duffy::Git.log      # => Produce tab separated listing of current git log.
     Duffy::Git.count    # => Count of git commits in current branch
     Duffy::Git.email    # => Local repo's git user.email or global if none.
+    Duffy::Git.branch   # => Current git branch.
 ```
 
 CPU Detection:
