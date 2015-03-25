@@ -27,6 +27,10 @@ module Duffy
         `git config --get user.email`.strip.presence
       end
 
+      # Display the current branch
+      def branch
+        `git rev-parse --abbrev-ref HEAD`.strip.presence
+      end
 
     end
   end
