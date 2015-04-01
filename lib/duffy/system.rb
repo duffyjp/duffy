@@ -9,17 +9,19 @@ module Duffy
     class << self
 
       # How many Physical CPUs do you have.
-      # Detected by counting unique physical IDs
+      # Linux:  Detected by counting unique physical IDs
+      # Mac:    hw.packages
       def cpus
         case RUBY_PLATFORM
           when /linux/  then File.read('/proc/cpuinfo').scan(/^physical id.*/).uniq.count rescue 1
-          when /darwin/ then `system -n hw.packages`.to_i rescue 1
+          when /darwin/ then `sysctl -n hw.packages`.to_i rescue 1
           else 1
         end
       end
 
       # How many actual CPU cores do we have not including Hyperthreading
-      # "cpu cores" in cpuinfo is on a per physical processor basis, so we multiply by the number of CPUs
+      # Linux:  "cpu cores" in cpuinfo is on a per physical processor basis, so we multiply by the number of CPUs
+      # Mac:    hw.physicalcpu
       def cores
         case RUBY_PLATFORM
           when /linux/  then (File.read('/proc/cpuinfo').scan(/^cpu cores.*/).first.scan(/\d+$/).first.to_i rescue 1) * cpus

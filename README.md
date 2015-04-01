@@ -46,7 +46,7 @@ This one is namespaced in case you use the 'git' gem.  I found it to be overkill
 ```
 
 CPU Detection:
-Linux only for now, each method returns 1 on non-Linux hosts.
+Linux and Mac only for now, each method returns 1 on unsupported hosts.
 Example results for my dual core i5 with hyperthreading.
 ```ruby
    Duffy::System.cpus     # => 1
