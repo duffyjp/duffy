@@ -36,6 +36,13 @@ Date Patches:
     fiscal_year         # Returns fiscal_year for a date.  See config to set your organization's fiscal year start.
 ```
 
+Active Record Aliases:
+```ruby
+    accepts => accepts_nested_attributes_for
+    habtm   => has_and_belongs_to_many
+```
+
+
 Git Access:
 This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
 ```ruby

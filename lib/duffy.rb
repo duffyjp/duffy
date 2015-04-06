@@ -4,8 +4,11 @@ require 'active_support/core_ext/object/blank'
 require 'date'
 
 # Rails Only Requirements
-require File.dirname(__FILE__) + "/duffy/engine"  if defined?(Rails)
-require File.dirname(__FILE__) + "/duffy/railtie" if defined?(Rails)
+if defined?(Rails)
+  require File.dirname(__FILE__) + "/duffy/engine"
+  require File.dirname(__FILE__) + "/duffy/railtie"
+  require File.dirname(__FILE__) + "/duffy/active_record"
+end
 
 # Normal Requirements
 require File.dirname(__FILE__) + "/duffy/date"
