@@ -39,6 +39,12 @@ module Duffy
         end
       end
 
+      # What is a sane number of threads to use for data processing.
+      # Only using true cores is a waste, using all pseudo cores decreases performance.
+      def sane_load
+        (cores + threads) / 2
+      end
+
     end
   end
 end

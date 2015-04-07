@@ -56,9 +56,10 @@ CPU Detection:
 Linux and Mac only for now, each method returns 1 on unsupported hosts.
 Example results for my dual core i5 with hyperthreading.
 ```ruby
-   Duffy::System.cpus     # => 1
-   Duffy::System.cores    # => 2
-   Duffy::System.threads  # => 4
+   Duffy::System.cpus       # => 1
+   Duffy::System.cores      # => 2
+   Duffy::System.threads    # => 4
+   Duffy::System.sane_load  # => 3
 ```
 
 
