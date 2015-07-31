@@ -2,6 +2,7 @@
 require 'active_support'
 require 'active_support/core_ext/object/blank'
 require 'date'
+require 'digest'
 
 # Rails Only Requirements
 if defined?(Rails)
