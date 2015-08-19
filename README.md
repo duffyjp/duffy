@@ -1,5 +1,8 @@
 # Duffy
 
+[![Code Climate](https://codeclimate.com/github/duffyjp/duffy/badges/gpa.svg)](https://codeclimate.com/github/duffyjp/duffy)
+[![Test Coverage](https://codeclimate.com/github/duffyjp/duffy/badges/coverage.svg)](https://codeclimate.com/github/duffyjp/duffy/coverage)
+
 This is a collection of reusable things I don't want to keep duplicating in tons of projects.
 
 ## Installation
