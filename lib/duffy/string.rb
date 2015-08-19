@@ -1,6 +1,12 @@
 # Monkey Patch String adding useful methods.
 class String
 
+  # Easier way to calculate the md5sum of a string.
+  def md5
+    Digest::MD5.hexdigest(self)
+  end
+  alias_method :md5sum, :md5
+
   def to_ssn
     ssn = "%09d" % self.to_numeric.to_i           # strips string of non zeros, and pads leading zeros
     ssn[0..2] + "-" + ssn[3..4] + "-" + ssn[5..8] # now it's like 123-45-6789
