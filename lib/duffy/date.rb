@@ -6,4 +6,14 @@ class Date
   def fiscal_year
     (self < Date.new(year, Duffy.configuration.fiscal_month, Duffy.configuration.fiscal_day)) ? year : year + 1
   end
+
+  def date!
+    self
+  end
+end
+
+class NilClass
+  def date!
+    self
+  end
 end

@@ -15,69 +15,86 @@ gem 'duffy'
 ```
 
 And then execute:
-
-    $ bundle
+```shell
+$ bundle
+```
 
 ## Usage
 
 String Patches:
-```ruby
-    to_ssn
-    to_numeric
-    to_alpha
-    to_alpha_numeric
-    pretty_phone
-    pretty_committer    # "bob".pretty_committer => "Robert McLovin"
-    space2nbsp
-    nl2br
-    gender_human
-    smart_titlecase     # Note: Has config options. See lib/duffy.rb
-```
+
+Method            | Example         | Output
+------------------|-----------------|-------
+date!             | "2014-07-16"    | #< Date: 2015-07-16 >
+md5               | "duffy"         | "904bc6e21e4799ce276200117215b88b"
+md5sum            | "duffy"         | "904bc6e21e4799ce276200117215b88b"
+to_ssn            | "123456789"     | "123-45-6789"
+to_numeric        | "abc123"        | "123"
+to_alpha          | "abc123"        | "abc"
+to_alpha_numeric  | "abc#$%123"     | "abc123
+pretty_phone      | "1234567890"    | "(123) 456-7890" 
+pretty_committer  | "bart"          | "Bartholomew Simpson" (See config)
+space2nbsp        | "space out"     | "space&nbsp;out" (requires rails)
+nl2br             | "space\nout"    | "space<br/>out"  (requires rails)
+gender_human      | "F"             | "Female"
+smart_titlecase   | "this and that" | "This and That" (Note: Has config options. See lib/duffy.rb)
+
 
 Date Patches:
-```ruby
-    fiscal_year         # Returns fiscal_year for a date.  See config to set your organization's fiscal year start.
-```
+
+Method            | Example         | Output
+------------------|-----------------|-------
+date!             | Date.today      | self
+fiscal_year       | Date.today      | 2015 (See config to set your organization's fiscal year start.)
+
+
+NilClass Patches:
+
+Method            | Example         | Output
+------------------|-----------------|-------
+date!             | nil             | self (Exists so you can call .date! on Date, String or nil
+
 
 Active Record Aliases:
-```ruby
-    accepts => accepts_nested_attributes_for
-    habtm   => has_and_belongs_to_many
-```
+
+Alias             | Standard
+------------------|---------
+accepts           | accepts_nested_attributes_for
+habtm             | has_and_belongs_to_many
 
 
 Git Access:
 This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
 ```ruby
-    Duffy::Git.log      # => Produce tab separated listing of current git log.
-    Duffy::Git.count    # => Count of git commits in current branch
-    Duffy::Git.email    # => Local repo's git user.email or global if none.
-    Duffy::Git.branch   # => Current git branch.
+Duffy::Git.log      # => Produce tab separated listing of current git log.
+Duffy::Git.count    # => Count of git commits in current branch
+Duffy::Git.email    # => Local repo's git user.email or global if none.
+Duffy::Git.branch   # => Current git branch.
 ```
 
 CPU Detection:
 Linux and Mac only for now, each method returns 1 on unsupported hosts.
 Example results for my dual core i5 with hyperthreading.
 ```ruby
-   Duffy::System.cpus       # => 1
-   Duffy::System.cores      # => 2
-   Duffy::System.threads    # => 4
-   Duffy::System.sane_load  # => 3
+Duffy::System.cpus       # => 1
+Duffy::System.cores      # => 2
+Duffy::System.threads    # => 4
+Duffy::System.sane_load  # => 3
 ```
 
 
 View Helpers:
 This is a work in progress.  I'm going to try to put all my generic helpers here.
 ```ruby
-    menu_tag
-    excel_icon
-    icon
+menu_tag
+excel_icon
+icon
 ```
 
 CSS Reset & Print Styles: Very barebones CSS Reset / Sensible defaults and Print stylesheets.
 ```ruby
-    require duffy/reset
-    require duffy/print
+require duffy/reset
+require duffy/print
 ```
 
 ## Contributing
