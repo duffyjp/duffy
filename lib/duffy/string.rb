@@ -1,12 +1,6 @@
 # Monkey Patch String adding useful methods.
 class String
 
-  # Cast a String to Date
-  def date!
-    Date.parse(self)
-  end
-
-
   # Easier way to calculate the md5sum of a string.
   def md5
     Digest::MD5.hexdigest(self)

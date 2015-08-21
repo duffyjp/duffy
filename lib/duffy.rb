@@ -8,7 +8,7 @@ require 'digest'
 if defined?(Rails)
   require File.dirname(__FILE__) + "/duffy/engine"
   require File.dirname(__FILE__) + "/duffy/railtie"
-  require File.dirname(__FILE__) + "/duffy/active_record"
+  require File.dirname(__FILE__) + "/duffy/active_record" if defined?(ActiveRecord)
 end
 
 # Normal Requirements

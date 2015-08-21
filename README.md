@@ -25,7 +25,6 @@ String Patches:
 
 Method            | Example         | Output
 ------------------|-----------------|-------
-date!             | "2014-07-16"    | #< Date: 2015-07-16 >
 md5               | "duffy"         | "904bc6e21e4799ce276200117215b88b"
 md5sum            | "duffy"         | "904bc6e21e4799ce276200117215b88b"
 to_ssn            | "123456789"     | "123-45-6789"
@@ -44,7 +43,6 @@ Date Patches:
 
 Method            | Example         | Output
 ------------------|-----------------|-------
-date!             | Date.today      | self
 fiscal_year       | Date.today      | 2015 (See config to set your organization's fiscal year start.)
 
 
@@ -52,7 +50,7 @@ NilClass Patches:
 
 Method            | Example         | Output
 ------------------|-----------------|-------
-date!             | nil             | self (Exists so you can call .date! on Date, String or nil
+to_date           | nil             | self (Exists so you can call .to_date on Date, String or nil
 
 
 Active Record Aliases:
