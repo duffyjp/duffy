@@ -8,7 +8,6 @@ This is a collection of reusable things I don't want to keep duplicating in tons
 ## Installation
 
 Add this line to your application's Gemfile:
-* This is a work in progress.  If someone decides to use this, you may want to lock your version number in your gemfile.
 
 ```ruby
 gem 'duffy'
@@ -39,21 +38,21 @@ gender_human      | "F"             | "Female"
 smart_titlecase   | "this and that" | "This and That" (Note: Has config options. See lib/duffy.rb)
 
 
-Date Patches:
+## Date Patches:
 
 Method            | Example         | Output
 ------------------|-----------------|-------
 fiscal_year       | Date.today      | 2015 (See config to set your organization's fiscal year start.)
 
 
-NilClass Patches:
+## NilClass Patches:
 
 Method            | Example         | Output
 ------------------|-----------------|-------
 to_date           | nil             | self (Exists so you can call .to_date on Date, String or nil
 
 
-Active Record Aliases:
+## Active Record Aliases:
 
 Alias             | Standard
 ------------------|---------
@@ -61,35 +60,41 @@ accepts           | accepts_nested_attributes_for
 habtm             | has_and_belongs_to_many
 
 
-Git Access:
+## Git Access:
 This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
-```ruby
-Duffy::Git.log      # => Produce tab separated listing of current git log.
-Duffy::Git.count    # => Count of git commits in current branch
-Duffy::Git.email    # => Local repo's git user.email or global if none.
-Duffy::Git.branch   # => Current git branch.
-```
 
-CPU Detection:
+Method    |   Result
+----------|---------
+Duffy::Git.log      | Produce tab separated listing of current git log.
+Duffy::Git.count    | Count of git commits in current branch
+Duffy::Git.email    | Local repo's git user.email or global if none.
+Duffy::Git.branch   | Current git branch.
+
+
+## CPU Detection:
 Linux and Mac only for now, each method returns 1 on unsupported hosts.
 Example results for my dual core i5 with hyperthreading.
-```ruby
-Duffy::System.cpus       # => 1
-Duffy::System.cores      # => 2
-Duffy::System.threads    # => 4
-Duffy::System.sane_load  # => 3
-```
+
+Method    |   Result
+----------|---------
+Duffy::System.cpus       | 1
+Duffy::System.cores      | 2
+Duffy::System.threads    | 4
+Duffy::System.sane_load  | 3
 
 
-View Helpers:
-This is a work in progress.  I'm going to try to put all my generic helpers here.
-```ruby
-menu_tag
-excel_icon
-icon
-```
 
-CSS Reset & Print Styles: Very barebones CSS Reset / Sensible defaults and Print stylesheets.
+## View Helpers:
+
+Method      | Example                             | Result
+------------|-------------------------------------|-------
+beast_mode  | beast_mode tags               | renders tag partial in parallel. Only available if you have the Parallel gem in your Gemfile.  You must also wrap your partial in a cache block.
+excel_icon  | excel_icon                    | generates hyperlinked excel.png in an li block to .xlsx version of current page or passed link.  Maintains current GET params.
+icon        | icon("tags", tags_path)       | generates link of class "icon" with the title and link provided. also sets id based on controller and action  |
+menu_tag    | menu_tag("Login", login_path) | generated hyperlinked li block used in common ul based navigation toolbars.
+
+
+## CSS Reset & Print Styles: Very barebones CSS Reset / Sensible defaults and Print stylesheets.
 ```ruby
 require duffy/reset
 require duffy/print

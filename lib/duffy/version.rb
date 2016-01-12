@@ -1,6 +1,7 @@
 module Duffy
-  VERSION = "0.2.4"
+  VERSION = "0.2.5"
 end
 
 # History
+# 0.2.5 - Added beast_mode helper to render partials in parallel
 # 0.2.4 - Added NilClass.to_date => nil
