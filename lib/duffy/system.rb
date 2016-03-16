@@ -40,9 +40,38 @@ module Duffy
       end
 
       # What is a sane number of threads to use for data processing.
-      # Only using true cores is a waste, using all pseudo cores decreases performance.
+      # Only using physical cores is a waste, using all logical cores decreases performance.
       def sane_load
         (cores + threads) / 2
+      end
+
+      # The system's current CPU utilization.
+      # Darwin: Get a list of all processes' CPU percentage and add them up.  Accurate to a couple percent vs. Activity Monitor.
+      # Linux:  Read /proc/stat twice and take the difference to give cpu time used in that interval.
+      def cpu_percent
+        case RUBY_PLATFORM
+          when /darwin/ then (`ps -A -o %cpu`.lines.map(&:to_f).inject(:+) rescue 0) / threads
+          when /linux/  then proc_diff rescue 0
+          else 0
+        end
+      end
+
+
+      private
+
+      # [CPU USE, CPU IDLE]
+      def proc_stat
+        cpu = File.open("/proc/stat", "r").read.lines.first
+        [cpu.split[1 .. 3].map(&:to_i).inject(:+), cpu.split[1 .. 4].map(&:to_i).inject(:+)]
+      end
+
+      # Poll proc_stat twice and find the usage in that time.
+      # Higher Sleep is more accurate, but obviously slower.
+      def proc_diff
+        s = proc_stat
+        sleep 0.2
+        f = proc_stat
+        (f[0] - s[0]) * 100.0 / (f[1] - s[1])
       end
 
     end

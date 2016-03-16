@@ -81,7 +81,7 @@ Duffy::System.cpus       | 1
 Duffy::System.cores      | 2
 Duffy::System.threads    | 4
 Duffy::System.sane_load  | 3
-
+Duffy::System.cpu_percent| 16%
 
 
 ## View Helpers:

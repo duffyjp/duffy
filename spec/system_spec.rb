@@ -20,4 +20,15 @@ describe Duffy::System do
       Duffy::System.threads.should be_an(Integer)
     end
   end
+
+  describe "cpu_percent" do
+    it "returns the current cpu load percentage" do
+      Duffy::System.cpu_percent.should be_a(Float)
+    end
+  end
+
+
+
+
+
 end
