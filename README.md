@@ -1,5 +1,6 @@
 # Duffy
 
+[![Build Status](https://travis-ci.org/duffyjp/duffy.svg?branch=master)](https://travis-ci.org/duffyjp/duffy)
 [![Code Climate](https://codeclimate.com/github/duffyjp/duffy/badges/gpa.svg)](https://codeclimate.com/github/duffyjp/duffy)
 [![Test Coverage](https://codeclimate.com/github/duffyjp/duffy/badges/coverage.svg)](https://codeclimate.com/github/duffyjp/duffy/coverage)
 
