@@ -29,13 +29,14 @@ module BeastModeHelper
 
 
         # silently render each partial as quickly as possible.  It's up to you to include a cache block!
-        Parallel.each(collection, in_processes: MAX_PROCESSES) do |object|
+        # "in_processes: nil" tells Parallel to use Processes instead of Threads, and self-determine the count.
+        Parallel.each(collection, in_processes: nil) do |object|
           render(partial: partial, object: object)
         end
       else
         # eg: beast_mode(@jobs)
         # Generate the Cache fragments for each object in parallel as fast as possible, but don't show them yet
-        Parallel.each(options, in_processes: MAX_PROCESSES) do |object|
+        Parallel.each(options, in_processes: nil) do |object|
           render(object)
         end
       end

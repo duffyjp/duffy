@@ -3,7 +3,7 @@ describe NilClass do
 
   describe "to_date" do
     it "returns nil" do
-      nil.to_date.should == nil
+      expect(nil.to_date).to eq(nil)
     end
   end
 end

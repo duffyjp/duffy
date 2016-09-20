@@ -5,19 +5,19 @@ describe Duffy::Git do
   # This generates the documentation more than anything.
   describe "log" do
     it "returns the git log" do
-      defined?(Duffy::Git.log).should == "method"
+      expect(defined?(Duffy::Git.log)).to eq("method")
     end
   end
 
   describe "count" do
     it "returns the git count" do
-      defined?(Duffy::Git.count).should == "method"
+      expect(defined?(Duffy::Git.count)).to eq("method")
     end
   end
 
   describe "email" do
     it "returns the git user.email" do
-      defined?(Duffy::Git.email).should == "method"
+      expect(defined?(Duffy::Git.email)).to eq("method")
     end
   end
 end

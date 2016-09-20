@@ -90,8 +90,6 @@ Duffy::System.cpu_percent| 16%
 Method      | Example                             | Result
 ------------|-------------------------------------|-------
 beast_mode  | beast_mode tags               | renders tag partial in parallel. Only available if you have the Parallel gem in your Gemfile.  You must also wrap your partial in a cache block.
-excel_icon  | excel_icon                    | generates hyperlinked excel.png in an li block to .xlsx version of current page or passed link.  Maintains current GET params.
-icon        | icon("tags", tags_path)       | generates link of class "icon" with the title and link provided. also sets id based on controller and action  |
 menu_tag    | menu_tag("Login", login_path) | generated hyperlinked li block used in common ul based navigation toolbars.
 
 

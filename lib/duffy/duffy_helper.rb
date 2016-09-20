@@ -12,6 +12,7 @@ module DuffyHelper
   # Add a yield(:excel) somewhere in your application layout:
   #   content_tag( :li, yield(:excel), class: :excel) if content_for?(:excel)
   def excel_icon(link = params.merge(format: "xlsx"))
+    ActiveSupport::Deprecation.warn('This method will be removed without replacement in future versions')
     content_for :excel do
       link_to(image_tag('excel.png'), link)
     end
@@ -24,6 +25,7 @@ module DuffyHelper
   #  - This is application specific and will just not do anything if it runs into a problem
   # If any uncaught exceptions are thrown in production you'll just get nothing, otherwise you'll get the error on screen.
   def icon(title, link, options = {})
+    ActiveSupport::Deprecation.warn('This method will be removed without replacement in future versions')
     begin
       options[:id]    = "icon_#{link.parameterize("_")}" unless link.blank?
       options[:class] = [:icon] << options[:class]
