@@ -24,7 +24,6 @@ require File.dirname(__FILE__) + "/duffy/version"
 # [application.css]
 # *= require duffy/reset
 module Duffy
-
   def self.configuration
     @configuration ||= Duffy::Configuration.new
   end
@@ -56,8 +55,4 @@ module Duffy
     config_accessor(:fiscal_month)      {7}
     config_accessor(:fiscal_day)        {1}
   end
-
 end
-
-
-

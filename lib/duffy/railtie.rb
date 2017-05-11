@@ -4,13 +4,14 @@ require File.dirname(__FILE__) + "/duffy_helper"
 require File.dirname(__FILE__) + "/beast_mode_helper"
 
 module Duffy
+  # Make our helpers available to those host application
   class Railtie < Rails::Railtie
     initializer "duffy_helper" do
-      ActiveSupport.on_load( :action_view ){ include DuffyHelper }
+      ActiveSupport.on_load(:action_view) { include DuffyHelper }
     end
 
     initializer "beast_mode_helper" do
-      ActiveSupport.on_load( :action_view ){ include BeastModeHelper }
+      ActiveSupport.on_load(:action_view) { include BeastModeHelper }
     end
   end
 end

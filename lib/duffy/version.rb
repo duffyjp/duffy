@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = "0.2.7"
+  VERSION = "0.3.0"
 end
 
 # History
+# 0.3.0 - Added system memory methods.  Removed deprecated icon methods.
 # 0.2.7 - Deprecated "icon" and "excel_icon"
 # 0.2.6 - Added cpu_percent to give the current total CPU usage percentage.
 # 0.2.5 - Added beast_mode helper to render partials in parallel

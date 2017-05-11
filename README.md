@@ -62,7 +62,6 @@ habtm             | has_and_belongs_to_many
 
 
 ## Git Access:
-This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
 
 Method    |   Result
 ----------|---------
@@ -73,8 +72,8 @@ Duffy::Git.branch   | Current git branch.
 
 
 ## CPU Detection:
-Linux and Mac only for now, each method returns 1 on unsupported hosts.
-Example results for my dual core i5 with hyperthreading.
+* Linux and Mac only for now, each method returns 1 on unsupported hosts.
+* Example results for my dual core i5 with hyperthreading.
 
 Method    |   Result
 ----------|---------
@@ -83,6 +82,16 @@ Duffy::System.cores      | 2
 Duffy::System.threads    | 4
 Duffy::System.sane_load  | 3
 Duffy::System.cpu_percent| 16%
+
+## Memory Statistics:
+* All values returned in Megabytes.
+* Available + Used always exactly adds up to Total.
+
+Method    |   Result
+----------|---------
+Duffy::System.mem_total       | 4096
+Duffy::System.mem_available   | 3072
+Duffy::System.mem_used        | 1024
 
 
 ## View Helpers:
