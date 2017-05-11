@@ -13,10 +13,12 @@ module Duffy
       # Mac:    hw.packages
       def cpus
         case RUBY_PLATFORM
-          when /linux/  then File.read('/proc/cpuinfo').scan(/^physical id.*/).uniq.count rescue 1
-          when /darwin/ then `sysctl -n hw.packages`.to_i rescue 1
+          when /linux/  then File.read('/proc/cpuinfo').scan(/^physical id.*/).uniq.count
+          when /darwin/ then `sysctl -n hw.packages`.to_i
           else 1
         end
+      rescue
+        1
       end
 
       # How many actual CPU cores do we have not including Hyperthreading
@@ -25,18 +27,22 @@ module Duffy
       def cores
         case RUBY_PLATFORM
           when /linux/  then (File.read('/proc/cpuinfo').scan(/^cpu cores.*/).first.scan(/\d+$/).first.to_i rescue 1) * cpus
-          when /darwin/ then `sysctl -n hw.physicalcpu`.to_i rescue 1
+          when /darwin/ then `sysctl -n hw.physicalcpu`.to_i
           else 1
         end
+      rescue
+        1
       end
 
       # How many threads does the system have.
       def threads
         case RUBY_PLATFORM
-          when /linux/  then File.read('/proc/cpuinfo').scan(/^processor\s*:/).size rescue 1
-          when /darwin/ then `sysctl -n hw.ncpu`.to_i rescue 1
+          when /linux/  then File.read('/proc/cpuinfo').scan(/^processor\s*:/).size
+          when /darwin/ then `sysctl -n hw.ncpu`.to_i
           else 1
         end
+      rescue
+        1
       end
 
       # What is a sane number of threads to use for data processing.
@@ -50,12 +56,46 @@ module Duffy
       # Linux:  Read /proc/stat twice and take the difference to give cpu time used in that interval.
       def cpu_percent
         case RUBY_PLATFORM
-          when /darwin/ then (`ps -A -o %cpu`.lines.map(&:to_f).inject(:+) rescue 0) / threads
-          when /linux/  then proc_diff rescue 0
+          when /darwin/ then `ps -A -o %cpu`.lines.map(&:to_f).inject(:+) / threads
+          when /linux/  then proc_diff
           else 0
         end
+      rescue
+        0
       end
 
+      # Total system memory in Megabytes
+      # Darwin: hw.memsize (bytes)
+      # Linux:  Read /proc/meminfo
+      def mem_total
+        case RUBY_PLATFORM
+          when /darwin/ then `sysctl -n hw.memsize`.to_i / 1024 / 1024
+          when /linux/  then File.read("/proc/meminfo").lines.grep(/MemTotal/).first.split[1].to_i / 1024
+          else 0
+        end
+      rescue
+        0
+      end
+
+      # Memory available for use in Megabytes
+      # Darwin: vm_stat (Pages Free + Pages Inactive)
+      # Linux:  Read /proc/meminfo
+      def mem_available
+        case RUBY_PLATFORM
+          when /darwin/ then `vm_stat`.lines.grep(/Pages free|Pages inactive/).map{|m| m.split.last.to_i}.inject(&:+) * 4 / 1024
+          when /linux/  then (File.read("/proc/meminfo").lines.grep(/MemAvailable/).first.split[1].to_i / 1024)
+          else 0
+        end
+      rescue
+        0
+      end
+
+      # Memory used
+      # Subtract mem_available from mem_total.
+      # This ignores file cache etc that is not actually used by programs.
+      def mem_used
+        mem_total - mem_available
+      end
 
       private
 

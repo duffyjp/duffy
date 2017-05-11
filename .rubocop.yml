@@ -1,0 +1,35 @@
+# 80 characters, Ruby Style Guide?  Really?  This isn't DOS.                                                     120 -->
+Metrics/LineLength:
+  Max: 120
+
+# Ruby console always uses double quotes for results.  I'm supposed to find-and-replace all my results?  Nope.
+Style/StringLiterals:
+  Enabled: false
+
+# In general I agree with this but don't find it important enough to waste time on.
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+Style/EmptyLines:
+  Enabled: false
+
+# I don't think this needs to be strictly one way or the other.
+Style/EmptyMethod:
+  Enabled: false
+
+# Another one of those it's good enough for ruby irb, it's good enough for me:
+Style/WordArray:
+  Enabled: false
+
+# These are going to be ginormous, don't worry about it.
+Metrics/BlockLength:
+  ExcludedMethods:
+  - describe
+  - context
+
+# I've literally never seen anyone use %i for this, and it looks terrible.
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# Nobody does this and it looks stupid
+Style/NumericLiterals:
+  Enabled: false
