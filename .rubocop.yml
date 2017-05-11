@@ -33,3 +33,6 @@ Style/SymbolArray:
 # Nobody does this and it looks stupid
 Style/NumericLiterals:
   Enabled: false
+
+Style/CaseIndentation:
+  Enabled: false
