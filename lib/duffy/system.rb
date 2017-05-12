@@ -78,7 +78,7 @@ module Duffy
       def mem_available
         case RUBY_PLATFORM
           when /darwin/ then `vm_stat`.lines.grep(/(free:|inactive:)\s*(\d+)/){$2}.map(&:to_i).inject(:+) * 4 / 1024
-          when /linux/  then (File.read("/proc/meminfo").lines.grep(/MemAvailable/).first.split[1].to_i / 1024)
+          when /linux/  then File.read("/proc/meminfo").lines.grep(/MemAvail|MemFree/).sort.first.split[1].to_i / 1024
           else 0
         end
       rescue
@@ -95,6 +95,7 @@ module Duffy
       private
 
       # [CPU USE, CPU IDLE]
+      # LINUX
       def proc_stat
         cpu = File.open("/proc/stat", "r").read.lines.first
         [cpu.split[1..3].map(&:to_i).inject(:+), cpu.split[1..4].map(&:to_i).inject(:+)]
@@ -102,6 +103,7 @@ module Duffy
 
       # Poll proc_stat twice and find the usage in that time.
       # Higher Sleep is more accurate, but obviously slower.
+      # LINUX
       def proc_diff
         s = proc_stat
         sleep 0.2

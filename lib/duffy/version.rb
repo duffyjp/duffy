@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = "0.3.0"
+  VERSION = "0.3.1"
 end
 
 # History
+# 0.3.1 - Fixed mem_available for old linux distros.
 # 0.3.0 - Added system memory methods.  Removed deprecated icon methods.
 # 0.2.7 - Deprecated "icon" and "excel_icon"
 # 0.2.6 - Added cpu_percent to give the current total CPU usage percentage.
