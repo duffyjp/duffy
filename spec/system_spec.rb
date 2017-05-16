@@ -53,5 +53,12 @@ describe Duffy::System do
     end
   end
 
+  describe 'mem_percent' do
+    it "returns the amount of used memory as a percentage of total" do
+      expect(Duffy::System.mem_percent).to be_a(Float)
+      expect(Duffy::System.mem_percent).to be > 0
+    end
+  end
+
 
 end

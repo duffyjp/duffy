@@ -92,6 +92,13 @@ module Duffy
         mem_total - mem_available
       end
 
+      # Percentage of Memory used, 0.0 .. 100.0
+      def mem_percent
+        (100.0 * mem_used / mem_total).round(1)
+      rescue
+        0
+      end
+
       private
 
       # [CPU USE, CPU IDLE]

@@ -81,7 +81,7 @@ Duffy::System.cpus       | 1
 Duffy::System.cores      | 2
 Duffy::System.threads    | 4
 Duffy::System.sane_load  | 3
-Duffy::System.cpu_percent| 16%
+Duffy::System.cpu_percent| 16
 
 ## Memory Statistics:
 * All values returned in Megabytes.
@@ -92,6 +92,7 @@ Method    |   Result
 Duffy::System.mem_total       | 4096
 Duffy::System.mem_available   | 3072
 Duffy::System.mem_used        | 1024
+Duffy::System.mem_percent     | 25
 
 
 ## View Helpers:
