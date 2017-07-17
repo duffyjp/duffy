@@ -40,10 +40,13 @@ smart_titlecase   | "this and that" | "This and That" (Note: Has config options.
 
 
 ## Date Patches:
+* See config to set your organization's fiscal year start.
 
-Method            | Example         | Output
-------------------|-----------------|-------
-fiscal_year       | Date.today      | 2015 (See config to set your organization's fiscal year start.)
+Method                   | Example                             | Output
+-------------------------|-------------------------------------|-------
+fiscal_year              | Date.today.fiscal_year              | 2018
+beginning_of_fiscal_year | Date.today.beginning_of_fiscal_year | 2017-07-01
+end_of_fiscal_year       | Date.today.end_of_fiscal_year       | 2018-06-30
 
 
 ## NilClass Patches:
