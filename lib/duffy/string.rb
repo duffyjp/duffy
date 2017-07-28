@@ -58,6 +58,7 @@ class String
   def pretty_phone
     number = self.to_s.gsub(/[^0-9\+]/, "")
     return "(" + number[0..2] + ") " + number[3..5] + "-" + number[6..9] if number.length == 10
+    return number[0..2] + "-" + number[3..6] if number.length == 7
     number
   end
 
