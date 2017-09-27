@@ -75,7 +75,8 @@ Duffy::Git.branch   | Current git branch.
 
 
 ## CPU Detection:
-* Linux and Mac only for now, each method returns 1 on unsupported hosts.
+* Linux and Mac only for now, numeric methods return 1 on unsupported hosts.
+* `virtual?` detects if the system is hypervisor guest. Will return false if unable to determine.
 * Example results for my dual core i5 with hyperthreading.
 
 Method    |   Result
@@ -85,6 +86,7 @@ Duffy::System.cores      | 2
 Duffy::System.threads    | 4
 Duffy::System.sane_load  | 3
 Duffy::System.cpu_percent| 16
+Duffy::System.virtual?   | true
 
 ## Memory Statistics:
 * All values returned in Megabytes.

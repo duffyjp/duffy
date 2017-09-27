@@ -22,7 +22,12 @@ describe Duffy::System do
     it "returns the total number of threads" do
       expect(Duffy::System.threads).to be_an(Integer)
       expect(Duffy::System.threads).to be >= 1
+    end
+  end
 
+  describe "virtual?" do
+    it "returns true if in a hypervisor, false otherwise." do
+      expect(Duffy::System.virtual?).to be_in [true, false]
     end
   end
 

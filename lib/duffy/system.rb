@@ -40,10 +40,20 @@ module Duffy
         1
       end
 
+      def virtual?
+        case RUBY_PLATFORM
+          when /linux/  then !!File.read('/proc/cpuinfo').scan(/^flags.*(hypervisor)/)[0]
+          when /darwin/ then false # PENDING
+          else false
+        end
+      rescue
+        false
+      end
+
       # What is a sane number of threads to use for data processing.
-      # Only using physical cores is a waste, using all logical cores decreases performance.
+      # You want to leave some headroom for your database etc running in other processes.
       def sane_load
-        (cores + threads) / 2
+        threads * 3 / 4
       end
 
       # The system's current CPU utilization.
