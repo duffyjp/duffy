@@ -21,7 +21,7 @@ module Duffy
       # Mac:    hw.physicalcpu
       def cores
         case RUBY_PLATFORM
-          when /linux/  then File.read('/proc/cpuinfo').scan(/(cpu cores).*(\d+)/)[0][1].to_i * cpus
+          when /linux/  then File.read('/proc/cpuinfo').scan(/(cpu cores)(\D)*(\d+)/)[0][2].to_i * cpus
           when /darwin/ then `sysctl -n hw.physicalcpu`.to_i
           else 1
         end
