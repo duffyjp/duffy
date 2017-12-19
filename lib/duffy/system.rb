@@ -56,6 +56,17 @@ module Duffy
         end
       end
 
+      # The battery percentage if present
+      # Darwin: pmset -g batt
+      # Linux:
+      def battery_percent
+        case RUBY_PLATFORM
+          when /darwin/ then `pmset -g batt`.scan(/^.*\t(.*%);/)[0][0] rescue nil
+          when /linux/  then "0%"
+          else nil
+        end
+      end
+
 
       private
 
