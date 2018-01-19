@@ -40,10 +40,13 @@ smart_titlecase   | "this and that" | "This and That" (Note: Has config options.
 
 
 ## Date Patches:
+* See config to set your organization's fiscal year start.
 
-Method            | Example         | Output
-------------------|-----------------|-------
-fiscal_year       | Date.today      | 2015 (See config to set your organization's fiscal year start.)
+Method                   | Example                             | Output
+-------------------------|-------------------------------------|-------
+fiscal_year              | Date.today.fiscal_year              | 2018
+beginning_of_fiscal_year | Date.today.beginning_of_fiscal_year | 2017-07-01
+end_of_fiscal_year       | Date.today.end_of_fiscal_year       | 2018-06-30
 
 
 ## NilClass Patches:
@@ -62,7 +65,6 @@ habtm             | has_and_belongs_to_many
 
 
 ## Git Access:
-This one is namespaced in case you use the 'git' gem.  I found it to be overkill for what I wanted.
 
 Method    |   Result
 ----------|---------
@@ -73,8 +75,9 @@ Duffy::Git.branch   | Current git branch.
 
 
 ## CPU Detection:
-Linux and Mac only for now, each method returns 1 on unsupported hosts.
-Example results for my dual core i5 with hyperthreading.
+* Linux and Mac only for now, numeric methods return 1 on unsupported hosts.
+* `virtual?` detects if the system is hypervisor guest. Will return false if unable to determine.
+* Example results for my dual core i5 with hyperthreading.
 
 Method    |   Result
 ----------|---------
@@ -82,7 +85,19 @@ Duffy::System.cpus       | 1
 Duffy::System.cores      | 2
 Duffy::System.threads    | 4
 Duffy::System.sane_load  | 3
-Duffy::System.cpu_percent| 16%
+Duffy::System.cpu_percent| 16
+Duffy::System.virtual?   | true
+
+## Memory Statistics:
+* All values returned in Megabytes.
+* Available + Used always exactly adds up to Total.
+
+Method    |   Result
+----------|---------
+Duffy::System.mem_total       | 4096
+Duffy::System.mem_available   | 3072
+Duffy::System.mem_used        | 1024
+Duffy::System.mem_percent     | 25
 
 
 ## View Helpers:
