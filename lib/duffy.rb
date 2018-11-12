@@ -3,6 +3,7 @@ require 'active_support'
 require 'active_support/core_ext/object/blank'
 require 'date'
 require 'digest'
+require 'shellwords'
 
 # Rails Only Requirements
 if defined?(Rails)

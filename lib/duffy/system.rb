@@ -73,8 +73,8 @@ module Duffy
       # Looks at current working directory
       def freespace
         case RUBY_PLATFORM
-          when /darwin/ then `df -m #{Dir.pwd}`.lines[1].split[3].to_i
-          when /linux/  then `df -m #{Dir.pwd}`.lines[1].split[3].to_i
+          when /darwin/ then `df -m #{Shellwords.shellescape(Dir.pwd)}`.lines[1].split[3].to_i
+          when /linux/  then `df -m #{Shellwords.shellescape(Dir.pwd)}`.lines[1].split[3].to_i
           else 0
         end
       end

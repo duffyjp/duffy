@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = '0.3.6'
+  VERSION = '1.0.0'
 end
 
 # History
+# 1.0.0 - Using Shellwords to escape directory listing in System.freespace.
 # 0.3.6 - Added disk freespace method.  Looks at working directory.
 # 0.3.5 - Fixed linux cores detection for very high core count CPUs.  Added virtualization detection on linux.
 # 0.3.4 - pretty_phone now adds the dash for 7 digit phone numbers.
