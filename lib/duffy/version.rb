@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = '1.0.2'
+  VERSION = '1.0.3'
 end
 
 # History
+# 1.0.3 - to_box methods now accept ANSI colored strings.
 # 1.0.2 - Added SimpleCov and added some more String tests.
 # 1.0.1 - Added String.to_box and Array.to_box.  Nice for text banners.
 # 1.0.0 - Using Shellwords to escape directory listing in System.freespace.
