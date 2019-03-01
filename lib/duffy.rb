@@ -13,6 +13,7 @@ if defined?(Rails)
 end
 
 # Normal Requirements
+require File.dirname(__FILE__) + "/duffy/array"
 require File.dirname(__FILE__) + "/duffy/date"
 require File.dirname(__FILE__) + "/duffy/git"
 require File.dirname(__FILE__) + "/duffy/string"

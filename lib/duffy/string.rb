@@ -7,6 +7,12 @@ class String
   end
   alias_method :md5sum, :md5
 
+  # Makes a nice box around your string for console output etc.
+  # See Array :to_box
+  def to_box(safe: true)
+    Array(self).to_box(safe: safe) unless self.empty?
+  end
+
   def to_ssn
     ssn = "%09d" % self.to_numeric.to_i           # strips string of non zeros, and pads leading zeros
     ssn[0..2] + "-" + ssn[3..4] + "-" + ssn[5..8] # now it's like 123-45-6789

@@ -1,6 +1,21 @@
 require 'spec_helper'
+
 describe String do
 
+  describe "to_box" do
+    it "creates a safe box around a string" do
+      expect("foobar".to_box).to eq "+--------+\n| foobar |\n+--------+"
+    end
+
+    it "creates a fancy box around a string" do
+      expect("foobar".to_box(safe: false)).to eq "╔────────╗\n║ foobar ║\n╚────────╝"
+    end
+
+    it "empty string returns nil" do
+      expect("".to_box).to eq nil
+    end
+
+  end
 
   describe "to_ssn" do
     it "maintains an already formatted SSN" do

@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
 end
 
 # History
+# 1.0.1 - Added String.to_box and Array.to_box.  Nice for text banners.
 # 1.0.0 - Using Shellwords to escape directory listing in System.freespace.
 # 0.3.6 - Added disk freespace method.  Looks at working directory.
 # 0.3.5 - Fixed linux cores detection for very high core count CPUs.  Added virtualization detection on linux.
