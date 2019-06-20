@@ -92,6 +92,20 @@ module Duffy
         0
       end
 
+      # The battery percentage 0.0 .. 100.0
+      # nil if no battery or error reading value.
+      # Darwin: pmset -g batt
+      # Linux:
+      def battery_percent
+        case RUBY_PLATFORM
+          when /darwin/ then `pmset -g batt`.scan(/^.*\t(.*%);/)[0][0].to_f
+          when /linux/  then File.read("/sys/class/power_supply/BAT0/charge_now").to_i * 100 / File.read("/sys/class/power_supply/BAT0/charge_full").to_i
+          else nil
+        end
+      rescue
+        nil
+      end
+
       # Memory available for use in Megabytes
       # Darwin: vm_stat (Pages Free + Pages Inactive)
       # Linux:  Read /proc/meminfo
@@ -118,6 +132,7 @@ module Duffy
       rescue
         0
       end
+
 
       private
 

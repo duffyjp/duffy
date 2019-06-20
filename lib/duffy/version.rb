@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = '1.0.3'
+  VERSION = '1.0.4'
 end
 
 # History
+# 1.0.4 - Added battery_percent method.
 # 1.0.3 - to_box methods now accept ANSI colored strings.
 # 1.0.2 - Added SimpleCov and added some more String tests.
 # 1.0.1 - Added String.to_box and Array.to_box.  Nice for text banners.
