@@ -3,6 +3,7 @@ require 'active_support'
 require 'active_support/core_ext/object/blank'
 require 'date'
 require 'digest'
+require 'shellwords'
 
 # Rails Only Requirements
 if defined?(Rails)
@@ -12,6 +13,7 @@ if defined?(Rails)
 end
 
 # Normal Requirements
+require File.dirname(__FILE__) + "/duffy/array"
 require File.dirname(__FILE__) + "/duffy/date"
 require File.dirname(__FILE__) + "/duffy/git"
 require File.dirname(__FILE__) + "/duffy/string"

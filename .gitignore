@@ -4,7 +4,6 @@
 /Gemfile.lock
 /_yardoc/
 /coverage/
-/doc/
 /pkg/
 /spec/reports/
 /tmp/
@@ -13,3 +12,5 @@
 *.o
 *.a
 mkmf.log
+.DS_Store
+

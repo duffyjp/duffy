@@ -14,9 +14,16 @@ describe Duffy::System do
     it "returns the total number of CPU cores" do
       expect(Duffy::System.cores).to be_an(Integer)
       expect(Duffy::System.cores).to be >= 1
-
     end
   end
+
+  describe "freespace" do
+    it "returns working directory freespace in megabytes" do
+      expect(Duffy::System.freespace).to be_an(Integer)
+      expect(Duffy::System.freespace).to be >= 1
+    end
+  end
+
 
   describe "threads" do
     it "returns the total number of threads" do

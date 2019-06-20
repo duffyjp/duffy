@@ -19,24 +19,29 @@ And then execute:
 $ bundle
 ```
 
-## Usage
-
-String Patches:
+## String Patches:
 
 Method            | Example         | Output
 ------------------|-----------------|-------
+gender_human      | "F"             | "Female"
 md5               | "duffy"         | "904bc6e21e4799ce276200117215b88b"
 md5sum            | "duffy"         | "904bc6e21e4799ce276200117215b88b"
-to_ssn            | "123456789"     | "123-45-6789"
-to_numeric        | "abc123"        | "123"
-to_alpha          | "abc123"        | "abc"
-to_alpha_numeric  | "abc#$%123"     | "abc123
+nl2br             | "space\nout"    | "space<br/>out"  (requires rails)
 pretty_phone      | "1234567890"    | "(123) 456-7890" 
 pretty_committer  | "bart"          | "Bartholomew Simpson" (See config)
-space2nbsp        | "space out"     | "space&nbsp;out" (requires rails)
-nl2br             | "space\nout"    | "space<br/>out"  (requires rails)
-gender_human      | "F"             | "Female"
 smart_titlecase   | "this and that" | "This and That" (Note: Has config options. See lib/duffy.rb)
+space2nbsp        | "space out"     | "space&nbsp;out" (requires rails)
+to_alpha          | "abc123"        | "abc"
+to_alpha_numeric  | "abc#$%123"     | "abc123
+to_box            | "abc".to_box    | ![Example](doc/abc.png)
+to_numeric        | "abc123"        | "123"
+to_ssn            | "123456789"     | "123-45-6789"
+
+
+## Array Patches:
+Method            | Example                | Output
+------------------|------------------------|-------
+to_box            | ['abc', 123].to_box    | ![Example](doc/abc123.png)
 
 
 ## Date Patches:
@@ -44,9 +49,9 @@ smart_titlecase   | "this and that" | "This and That" (Note: Has config options.
 
 Method                   | Example                             | Output
 -------------------------|-------------------------------------|-------
-fiscal_year              | Date.today.fiscal_year              | 2018
 beginning_of_fiscal_year | Date.today.beginning_of_fiscal_year | 2017-07-01
 end_of_fiscal_year       | Date.today.end_of_fiscal_year       | 2018-06-30
+fiscal_year              | Date.today.fiscal_year              | 2018
 
 
 ## NilClass Patches:
@@ -66,12 +71,12 @@ habtm             | has_and_belongs_to_many
 
 ## Git Access:
 
-Method    |   Result
-----------|---------
-Duffy::Git.log      | Produce tab separated listing of current git log.
+Method              |   Result
+--------------------|---------
+Duffy::Git.branch   | Current git branch.
 Duffy::Git.count    | Count of git commits in current branch
 Duffy::Git.email    | Local repo's git user.email or global if none.
-Duffy::Git.branch   | Current git branch.
+Duffy::Git.log      | Produce tab separated listing of current git log.
 
 
 ## CPU Detection:
@@ -101,18 +106,12 @@ Duffy::System.mem_percent     | 25
 
 
 ## View Helpers:
+* Rails
 
 Method      | Example                             | Result
 ------------|-------------------------------------|-------
 beast_mode  | beast_mode tags               | renders tag partial in parallel. Only available if you have the Parallel gem in your Gemfile.  You must also wrap your partial in a cache block.
-menu_tag    | menu_tag("Login", login_path) | generated hyperlinked li block used in common ul based navigation toolbars.
 
-
-## CSS Reset & Print Styles: Very barebones CSS Reset / Sensible defaults and Print stylesheets.
-```ruby
-require duffy/reset
-require duffy/print
-```
 
 ## Contributing
 
