@@ -113,11 +113,11 @@ class String
     string = (self.upcase == self)? self.downcase : self
 
     result = ""
-    string.gsub(/[_-]/, ' ').split(/( [:.;?!][ ] | (?:[ ]|^)[""] )/x).each do |s|
+    string.gsub('_', ' ').split(/( [:.;?!][ ] | (?:[ ]|^)[""] )/x).each do |s|
       s.gsub!(/ \b( [[:alpha:]] [[:lower:].'']* )\b /x) do |w|
         # Skip words with inresult dots, e.g. "del.icio.us" or "example.com"
         (w =~ / [[:alpha:]] [.] [[:alpha:]] /x) ? w : w.capitalize
-      end #gsub!
+      end
 
       # Lowercase our list of small words:
       s.gsub!(/\b(#{small_re})\b/io) { |w| w.downcase }
@@ -135,9 +135,19 @@ class String
     # Special Cases:
     upcase_re = (Array(Duffy.configuration.upcase_custom) + Array(Duffy.configuration.upcase_default)).uniq.join("|")
 
+    # Names with apostrophes; O'Brian, De'Wayne. 3+ Skips "I've" "Haven't" etc.
+    result.gsub!(/([A-Z][a-z]*)'([a-z]{3,})/) { "#{$1}'#{$2.capitalize}" }
+
     result.gsub!(/ V(s?)\. /, ' v\1. ') # "v." and "vs."
+
     result.gsub!(/([''])S\b/, '\1s') # 'S (otherwise you get "the SEC'S decision")
+
     result.gsub!(/\b(#{upcase_re})\b/i) { |w| w.upcase } unless upcase_re.blank?
-    result
+
+    # Squash repeated whitespace characters
+    result.gsub!(/\s+/, ' ')
+
+    # Strip leading / tailing whitespace and return
+    result.strip
   end
 end

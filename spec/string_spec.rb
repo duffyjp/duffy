@@ -27,15 +27,51 @@ describe String do
   end
 
   describe "smart_titlecase" do
-    { "foo"                     => "Foo",
-      "IMPORTANT STUFF"         => "Important Stuff",
-      "123 main st."            => "123 Main St.",
-      "a tale of two cities"    => "A Tale of Two Cities"
+    {
+      "123 Main St."            => "123 Main St.",            # Numbers are allowed
+      "A Tale Of Two Cities"    => "A Tale of Two Cities",    # Articles are only capitalized if first
+      "At mt. Kilimanjaro"      => "At Mt. Kilimanjaro",      # Small non-articles are capitalized
+      "De'wayne"                => "De'Wayne",                # Names with apostrophes (longer first half)
+      "Hyphenated-Lastname"     => "Hyphenated-Lastname",     # Hyphenated words retain hyphen and capitalize
+      "I'm Here Ma'am"          => "I'm Here Ma'am",          # Contractions are treated as a single word
+      "Miller (Smith)"          => "Miller (Smith)",          # Parentheses are allowed
+      "O'brian"                 => "O'Brian",                 # Names with apostrophes (single character first half)
+      "Sample"                  => "Sample",                  # Already Capitalized, all lower, all upper okay
+      "Under_scores"            => "Under Scores",            # Underscores are treated as spaces
+
+      "Double  Space"           => "Double Space",            # Clear duplicated whitespace
+      "  Leading Space"         => "Leading Space",           # Remove leading whitespace
+      "Trailing Space  "        => "Trailing Space",          # Remove trailing whitespace
     }.each do |before, after|
-      it "#{before.ljust(20)} => #{after}" do
+
+      # As typed above
+      it "#{before.strip.ljust(22)} => #{after}" do
+        expect(before.smart_titlecase).to eq after
+      end
+
+      # As all-lowercase
+      it "#{before.strip.downcase.ljust(22)} => #{after}" do
+        expect(before.downcase.smart_titlecase).to eq after
+      end
+
+      # As all-uppercase
+      it "#{before.strip.upcase.ljust(22)} => #{after}" do
+        expect(before.upcase.smart_titlecase).to eq after
+      end
+    end
+
+    # CamelCase words will be preserved.
+    {
+      "DreamWorks"              => "DreamWorks",
+      "McDonald's happy-meal"   => "McDonald's Happy-Meal",
+    }.each do |before, after|
+
+      # As typed above
+      it "#{before.ljust(22)} => #{after}" do
         expect(before.smart_titlecase).to eq after
       end
     end
+
   end
 
   describe "to_alpha" do
