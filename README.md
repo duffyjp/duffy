@@ -39,10 +39,10 @@ to_ssn            | "123456789"     | "123-45-6789"
 
 
 ## Array Patches:
-Method            | Example                | Output
-------------------|------------------------|-------
-to_box            | ['abc', 123].to_box    | ![Example](doc/abc123.png)
-
+Method            | Example                   | Output
+------------------|---------------------------|-------
+to_box            | ['abc', 123].to_box       | ![Example](doc/abc123.png)
+to_markdown       | [[1,2],[3,4]].to_markdown | ![Example](doc/markdown.png)
 
 ## Date Patches:
 * See config to set your organization's fiscal year start.

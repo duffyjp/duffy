@@ -26,7 +26,7 @@ class Array
   # Horse  | Car    |            | 0
   #
   def to_markdown
-    raise "Expected 2D array" unless self.first.is_a?(Array)
+    raise "expected 2D array" unless self.first.is_a?(Array)
 
     # Find max widths of data/headers: eg => [10, 25, 18, 21, 6]
     widths = self.transpose.map{ |col| ([col.first.class.to_s.length] + col.map{ |i| i.to_s.length }).max }
