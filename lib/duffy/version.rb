@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = '1.0.5'
+  VERSION = '1.0.6'
 end
 
 # History
+# 1.0.6 - Add to_markdown Array method.
 # 1.0.5 - Update smart_titlecase to better accommodate names.
 # 1.0.4 - Added battery_percent method.
 # 1.0.3 - to_box methods now accept ANSI colored strings.
