@@ -76,12 +76,15 @@ class String
   end
 
   def space2nbsp
-    # turns double space to double nbsp
-    (self.nil?)? "" : self.to_s.gsub(/ {2}/, "&nbsp;&nbsp;").html_safe
+    # turns >= double space to double nbsp
+    string = (self.nil?)? "" : self.to_s.gsub(/ {2,}/, "&nbsp;&nbsp;")
+    defined?(html_safe) ? string.html_safe : string
   end
 
+  # Replace the various combinations of newline characters with HTML <br> tags.
   def nl2br
-    (self.nil?)? "" : self.to_s.gsub(/(\r)?\n/, "<br />").html_safe
+    string = (self.nil?)? "" : self.to_s.gsub(/(\r\n)|(\n\r)|\n|\v/, "<br>")
+    defined?(html_safe) ? string.html_safe : string
   end
 
 

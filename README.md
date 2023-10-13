@@ -17,21 +17,21 @@ $ bundle
 
 ## String Patches:
 
-Method            | Example         | Output
-------------------|-----------------|-------
-gender_human      | "F"             | "Female"
-md5               | "duffy"         | "904bc6e21e4799ce276200117215b88b"
-md5sum            | "duffy"         | "904bc6e21e4799ce276200117215b88b"
-nl2br             | "space\nout"    | "space<br/>out"  (requires rails)
-pretty_phone      | "1234567890"    | "(123) 456-7890" 
-pretty_committer  | "bart"          | "Bartholomew Simpson" (See config)
-smart_titlecase   | "this and that" | "This and That" (Note: Has config options. See lib/duffy.rb)
-space2nbsp        | "space out"     | "space&nbsp;out" (requires rails)
-to_alpha          | "abc123"        | "abc"
-to_alpha_numeric  | "abc#$%123"     | "abc123
-to_box            | "abc".to_box    | ![Example](doc/abc.png)
-to_numeric        | "abc123"        | "123"
-to_ssn            | "123456789"     | "123-45-6789"
+Method            | Example          | Output                             | Notes
+------------------|------------------|------------------------------------|------
+gender_human      | "F"              | "Female"                           |
+md5               | "duffy"          | "904bc6e21e4799ce276200117215b88b" |
+md5sum            | "duffy"          | "904bc6e21e4799ce276200117215b88b" |
+nl2br             | "space\nout"     | "space<br/>out"                    | various OS newline permutations
+pretty_phone      | "1234567890"     | "(123) 456-7890"                   | US phone number with or without area code
+pretty_committer  | "bart"           | "Bartholomew Simpson"              | See config
+smart_titlecase   | "this and that"  | "This and That"                    | Has config options. See lib/duffy.rb
+space2nbsp        | "space  out"     | "space&nbsp;&nbsp;out"             | Double space holdouts rejoice.
+to_alpha          | "abc123"         | "abc"                              |
+to_alpha_numeric  | "abc#$%123"      | "abc123                            |
+to_box            | "abc".to_box     | ![Example](doc/abc.png)            |
+to_numeric        | "abc123"         | "123"                              |
+to_ssn            | "123456789"      | "123-45-6789"                      |
 
 
 ## Array Patches:
