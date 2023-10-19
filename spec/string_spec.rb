@@ -8,6 +8,39 @@ describe String do
     end
   end
 
+  describe "nl2br" do
+    it "converts linux newlines" do
+      expect("This\nand\nthat.".nl2br).to eq "This<br>and<br>that."
+    end
+    it "converts windows newlines" do
+      expect("This\r\nand\r\nthat.".nl2br).to eq "This<br>and<br>that."
+    end
+    it "converts backwards windows newlines" do
+      expect("This\n\rand\n\rthat.".nl2br).to eq "This<br>and<br>that."
+    end
+
+    it "converts vertical tabs from dubious software newlines" do
+      expect("This\vand\vthat.".nl2br).to eq "This<br>and<br>that."
+    end
+
+    it "slash R slash N slash N becomes <br><br>" do
+      expect("This\r\n\nthat.".nl2br).to eq "This<br><br>that."
+    end
+
+    it "slash N slash R slash N becomes <br><br>" do
+      expect("This\n\r\nthat.".nl2br).to eq "This<br><br>that."
+    end
+
+    it "slash N slash N slash R becomes <br><br>" do
+      expect("This\n\n\rthat.".nl2br).to eq "This<br><br>that."
+    end
+
+    it "slash N slash N slash N becomes <br><br><br>" do
+      expect("This\n\n\nthat.".nl2br).to eq "This<br><br><br>that."
+    end
+  end
+
+
   describe "pretty_phone" do
     it "formats an American phone number with Area Code" do
       expect("1234567890".pretty_phone).to eq "(123) 456-7890"
@@ -23,6 +56,21 @@ describe String do
 
     it "leaves shorter strings alone" do
       expect("1123".pretty_phone).to eq "1123"
+    end
+  end
+
+  describe "space2nbsp" do
+
+    it "leaves single space alone" do
+      expect("1 1".space2nbsp).to eq "1 1"
+    end
+
+    it "turns double space to double nbsp" do
+      expect("1  2".space2nbsp).to eq "1&nbsp;&nbsp;2"
+    end
+
+    it "turns triple space to double nbsp" do
+      expect("1   3".space2nbsp).to eq "1&nbsp;&nbsp;3"
     end
   end
 
