@@ -16,24 +16,6 @@ module Duffy
         1
       end
 
-      # Get the CPU architecture
-      def cpu_arch
-        `uname -m`.to_s.strip
-      rescue
-        'Unknown'
-      end
-
-      # Get the model of CPU
-      def cpu_model
-        case RUBY_PLATFORM
-          when /linux/  then ''
-          when /darwin/ then `sysctl -n machdep.cpu.brand_string`.to_s.strip
-          else 1
-        end
-      rescue
-        'Unknown'
-      end
-
       # How many actual CPU cores do we have not including Hyperthreading
       # Linux:  "cpu cores" in cpuinfo is on a per physical processor basis, so we multiply by the number of CPUs
       # Mac:    hw.physicalcpu
