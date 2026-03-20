@@ -1,8 +1,9 @@
 module Duffy
-  VERSION = '1.0.7'
+  VERSION = '1.0.8'
 end
 
 # History
+# 1.0.8 - Added support for +1 country code in pretty_phone.
 # 1.0.7 - Added vertical tab to list of characters replace with <br> in nl2br.
 # 1.0.6 - Add to_markdown Array method.
 # 1.0.5 - Update smart_titlecase to better accommodate names.

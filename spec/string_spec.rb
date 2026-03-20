@@ -46,6 +46,10 @@ describe String do
       expect("1234567890".pretty_phone).to eq "(123) 456-7890"
     end
 
+    it "formats a +1 American phone number with Area Code" do
+      expect("+16081234567".pretty_phone).to eq "(608) 123-4567"
+    end
+
     it "formats an American phone number without Area Code" do
       expect("4567890".pretty_phone).to eq "456-7890"
     end
