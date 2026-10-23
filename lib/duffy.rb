@@ -1,5 +1,6 @@
 # External Requirements
 require 'active_support'
+require 'active_support/core_ext/class/attribute'
 require 'active_support/core_ext/object/blank'
 require 'date'
 require 'digest'
@@ -42,19 +43,16 @@ module Duffy
   # end
   #
   class Configuration
-    include ActiveSupport::Configurable
-
     # Smart Titlecase
-    # Use :update_custom to add uppercase special cases
-    # Use :update_default to replace my defaults
-    config_accessor(:upcase_custom)     # {%w(NBC CNN FOO)}
-    config_accessor(:upcase_default)    {%w(HR II III IV Q&A USA)}
+    class_attribute :upcase_custom, :upcase_default, :instance_predicate => false
+    self.upcase_default = %w(HR II III IV Q&A USA)
 
     # Pretty Committer
-    config_accessor(:committers)        # {"jpd" => "Jacob", "ers|Eric" => "Eric"}
+    class_attribute :committers, :instance_predicate => false
 
     # Fiscal Year Start: Default July 1st.
-    config_accessor(:fiscal_month)      {7}
-    config_accessor(:fiscal_day)        {1}
+    class_attribute :fiscal_month, :fiscal_day, :instance_predicate => false
+    self.fiscal_month = 7
+    self.fiscal_day = 1
   end
 end

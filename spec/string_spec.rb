@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe String do
 
+  describe "gender_human" do
+    {"M" => "Male", "F" => "Female", "O" => "Other",
+     "m" => "Male", "f" => "Female", "o" => "Other",
+     "" => "", "unknown" => ""}.each do |value, expected|
+      it "converts #{value.inspect} to #{expected.inspect}" do
+        expect do
+          expect(value.gender_human).to eq expected
+        end.to output(/DEPRECATION WARNING: String#gender_human is deprecated.*Move this mapping into your application/).to_stderr
+      end
+    end
+  end
+
   describe "md5" do
     it "generates an md5sum of the given string" do
       expect("foobar".md5).to eq "3858f62230ac3c915f300c664312c63f"

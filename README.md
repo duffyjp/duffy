@@ -15,11 +15,52 @@ And then execute:
 $ bundle
 ```
 
+## Configuration
+
+Set app-specific options in `config/initializers/duffy.rb`:
+
+```ruby
+Duffy.configure do |config|
+	config.upcase_custom = %w(NBC CNN DFM)
+	config.committers = { "jpd" => "Jacob", "ers|Eric" => "Eric" }
+	config.fiscal_month = 7
+	config.fiscal_day = 1
+end
+```
+
+`upcase_custom` adds uppercase exceptions for `smart_titlecase` alongside
+`upcase_default`, which defaults to `%w(HR II III IV Q&A USA)`. Assign
+`upcase_default` to replace those defaults. `committers` maps regular expression
+patterns (strings or regexps) to friendly names for `pretty_committer`.
+Both `upcase_custom` and `committers` default to `nil`. The fiscal year starts
+on July 1 unless overridden.
+
+Configuration now uses `class_attribute` instead of the deprecated
+`ActiveSupport::Configurable`. Existing `Duffy.configure` blocks and direct
+`Duffy.configuration.setting` access need no changes, including on older Rails
+versions. Class-level setting accessors also remain available.
+
+If an app uses the former ActiveSupport configuration APIs, update it as follows:
+
+| Previous API | Replacement |
+|--------------|-------------|
+| `Duffy.configuration.config.upcase_custom = values` | `Duffy.configuration.upcase_custom = values` |
+| `Duffy.configuration.config[:committers] = mapping` | `Duffy.configuration.committers = mapping` |
+| `Duffy::Configuration.config.fiscal_month = 9` | `Duffy::Configuration.fiscal_month = 9` |
+| `Duffy::Configuration.configure { \|config\| ... }` | `Duffy.configure { \|config\| ... }` |
+
+`Duffy::Configuration.configure` previously changed class defaults; to retain
+that behavior, assign settings directly on `Duffy::Configuration` instead.
+The former `.config` options object and arbitrary configuration keys are no
+longer supported. When changing array or hash settings, assign a new value
+(for example, `config.upcase_default = config.upcase_default + %w(NBC)`)
+rather than mutating inherited defaults with `<<` or `merge!`.
+
 ## String Patches:
 
 Method            | Example          | Output                             | Notes
 ------------------|------------------|------------------------------------|------
-gender_human      | "F"              | "Female"                           |
+gender_human      | "F"              | "Female"                           | Deprecated; move this mapping into your application. |
 md5               | "duffy"          | "904bc6e21e4799ce276200117215b88b" |
 md5sum            | "duffy"          | "904bc6e21e4799ce276200117215b88b" |
 nl2br             | "space\nout"     | "space<br/>out"                    | various OS newline permutations

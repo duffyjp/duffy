@@ -90,6 +90,7 @@ class String
 
 
   def gender_human
+    ActiveSupport::Deprecation.new.warn('String#gender_human is deprecated and will be removed in a future release. Move this mapping into your application.')
     case (self.to_s.upcase)
       when "M" then "Male"
       when "F" then "Female"
