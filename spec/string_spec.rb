@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'open3'
+require 'rbconfig'
 
 describe String do
 
@@ -91,6 +93,21 @@ describe String do
   end
 
   describe "smart_titlecase" do
+    it "handles empty, whitespace-only, and role names when string literals are frozen" do
+      source = <<~RUBY
+        {"" => "", "   " => "", "role_administrator" => "Role Administrator"}.each do |value, expected|
+          abort "Unexpected titlecase result" unless value.smart_titlecase == expected
+        end
+      RUBY
+      _stdout, stderr, status = Open3.capture3(
+        RbConfig.ruby, "--enable=frozen-string-literal",
+        "-I", File.expand_path("../lib", __dir__), "-rduffy", "-e", source
+      )
+
+      expect(status.success?).to eq(true), stderr
+      expect(stderr).to eq ""
+    end
+
     {
       "123 Main St."            => "123 Main St.",            # Numbers are allowed
       "A Tale Of Two Cities"    => "A Tale of Two Cities",    # Articles are only capitalized if first

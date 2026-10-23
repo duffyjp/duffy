@@ -117,7 +117,7 @@ class String
     # if source is all uppercase, use all lowercase instead.  -- jpd
     string = (self.upcase == self)? self.downcase : self
 
-    result = ""
+    result = String.new
     string.gsub('_', ' ').split(/( [:.;?!][ ] | (?:[ ]|^)[""] )/x).each do |s|
       s.gsub!(/ \b( [[:alpha:]] [[:lower:].'']* )\b /x) do |w|
         # Skip words with inresult dots, e.g. "del.icio.us" or "example.com"
