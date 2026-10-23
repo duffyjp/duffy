@@ -1,6 +1,20 @@
 require 'spec_helper'
+require 'open3'
+require 'rbconfig'
 
 describe String do
+
+  describe "gender_human" do
+    {"M" => "Male", "F" => "Female", "O" => "Other",
+     "m" => "Male", "f" => "Female", "o" => "Other",
+     "" => "", "unknown" => ""}.each do |value, expected|
+      it "converts #{value.inspect} to #{expected.inspect}" do
+        expect do
+          expect(value.gender_human).to eq expected
+        end.to output(/DEPRECATION WARNING: String#gender_human is deprecated.*Move this mapping into your application/).to_stderr
+      end
+    end
+  end
 
   describe "md5" do
     it "generates an md5sum of the given string" do
@@ -79,9 +93,25 @@ describe String do
   end
 
   describe "smart_titlecase" do
+    it "handles empty, whitespace-only, and role names when string literals are frozen" do
+      source = <<~RUBY
+        {"" => "", "   " => "", "role_administrator" => "Role Administrator"}.each do |value, expected|
+          abort "Unexpected titlecase result" unless value.smart_titlecase == expected
+        end
+      RUBY
+      _stdout, stderr, status = Open3.capture3(
+        RbConfig.ruby, "--enable=frozen-string-literal",
+        "-I", File.expand_path("../lib", __dir__), "-rduffy", "-e", source
+      )
+
+      expect(status.success?).to eq(true), stderr
+      expect(stderr).to eq ""
+    end
+
     {
       "123 Main St."            => "123 Main St.",            # Numbers are allowed
       "A Tale Of Two Cities"    => "A Tale of Two Cities",    # Articles are only capitalized if first
+      "a tale of two cities"    => "A Tale of Two Cities",    # Articles are only capitalized if first
       "At mt. Kilimanjaro"      => "At Mt. Kilimanjaro",      # Small non-articles are capitalized
       "De'wayne"                => "De'Wayne",                # Names with apostrophes (longer first half)
       "Hyphenated-Lastname"     => "Hyphenated-Lastname",     # Hyphenated words retain hyphen and capitalize
@@ -90,10 +120,10 @@ describe String do
       "O'brian"                 => "O'Brian",                 # Names with apostrophes (single character first half)
       "Sample"                  => "Sample",                  # Already Capitalized, all lower, all upper okay
       "Under_scores"            => "Under Scores",            # Underscores are treated as spaces
-
       "Double  Space"           => "Double Space",            # Clear duplicated whitespace
       "  Leading Space"         => "Leading Space",           # Remove leading whitespace
       "Trailing Space  "        => "Trailing Space",          # Remove trailing whitespace
+      ""                        => ""                         # Empty string remains empty
     }.each do |before, after|
 
       # As typed above

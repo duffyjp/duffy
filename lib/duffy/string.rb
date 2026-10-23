@@ -90,6 +90,7 @@ class String
 
 
   def gender_human
+    ActiveSupport::Deprecation.new.warn('String#gender_human is deprecated and will be removed in a future release. Move this mapping into your application.')
     case (self.to_s.upcase)
       when "M" then "Male"
       when "F" then "Female"
@@ -116,7 +117,7 @@ class String
     # if source is all uppercase, use all lowercase instead.  -- jpd
     string = (self.upcase == self)? self.downcase : self
 
-    result = ""
+    result = String.new
     string.gsub('_', ' ').split(/( [:.;?!][ ] | (?:[ ]|^)[""] )/x).each do |s|
       s.gsub!(/ \b( [[:alpha:]] [[:lower:].'']* )\b /x) do |w|
         # Skip words with inresult dots, e.g. "del.icio.us" or "example.com"

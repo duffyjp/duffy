@@ -49,6 +49,12 @@ describe Duffy::System do
       expect(Duffy::System.mem_percent).to be_a(Float)
       expect(Duffy::System.mem_percent).to be > 0
     end
+
+    it "returns zero when memory information cannot be read" do
+      allow(described_class).to receive(:mem_used).and_raise(IOError)
+
+      expect(described_class.mem_percent).to eq 0
+    end
   end
 
   describe 'mem_total' do
@@ -62,6 +68,16 @@ describe Duffy::System do
     it "returns the amount of used memory in Megabytes" do
       expect(Duffy::System.mem_used).to be_an(Integer)
       expect(Duffy::System.mem_used).to be > 0
+    end
+  end
+
+  describe "sane_load" do
+    {8 => 6, 3 => 2, 1 => 0}.each do |threads, expected|
+      it "uses three quarters of #{threads} threads, rounded down" do
+        allow(described_class).to receive(:threads).and_return(threads)
+
+        expect(described_class.sane_load).to eq expected
+      end
     end
   end
 
